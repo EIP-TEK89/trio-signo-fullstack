@@ -1,0 +1,9 @@
+[submodule "trio-signo-server"]
+	path = trio-signo-server
+	url = git@github.com:EIP-TEK89/trio-signo-server.git
+[submodule "trio-signo-front"]
+	path = trio-signo-front
+	url = git@github.com:EIP-TEK89/trio-signo-front.git
+[submodule "trio-signo-ai"]
+	path = trio-signo-ai
+	url = git@github.com:EIP-TEK89/trio-signo-ai.git
