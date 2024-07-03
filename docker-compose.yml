@@ -37,5 +37,14 @@ services:
     networks:
       - mynetwork
 
+  ai-service:
+    build: trio-signo-ai/.
+    ports:
+      - "5000:5000"
+    depends_on:
+      - server
+    networks:
+      - mynetwork
+
 networks:
   mynetwork:
