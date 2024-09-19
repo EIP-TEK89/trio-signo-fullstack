@@ -1,20 +1,20 @@
 version: '3.8'
 
 services:
-  server:
-    build: trio-signo-server/.
-    ports:
-      - "3000:3000"
-    volumes:
-      - .:/usr/src/app
-    depends_on:
-      db:
-        condition: service_healthy
-    environment:
-      DATABASE_URL: postgresql://user:password@db:5432/triosigno?schema=public
-    networks:
-      - mynetwork
-    entrypoint: ["/bin/sh", "-c", "echo $DATABASE_URL && npx prisma migrate deploy && npm run start:prod"]
+  # server:
+  #   build: trio-signo-server/.
+  #   ports:
+  #     - "3000:3000"
+  #   volumes:
+  #     - .:/usr/src/app
+  #   depends_on:
+  #     db:
+  #       condition: service_healthy
+  #   environment:
+  #     DATABASE_URL: postgresql://user:password@db:5432/triosigno?schema=public
+  #   networks:
+  #     - mynetwork
+  #   entrypoint: ["/bin/sh", "-c", "echo $DATABASE_URL && npx prisma migrate deploy && npm run start:prod"]
 
   db:
     image: postgres
@@ -43,14 +43,14 @@ services:
     networks:
       - mynetwork
 
-  ai-service:
-    build: trio-signo-ai/.
-    ports:
-      - "5000:5000"
-    depends_on:
-      - server
-    networks:
-      - mynetwork
+  # ai-service:
+  #   build: trio-signo-ai/.
+  #   ports:
+  #     - "5000:5000"
+  #   depends_on:
+  #     - server
+  #   networks:
+  #     - mynetwork
 
 networks:
   mynetwork:
