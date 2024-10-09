@@ -1,15 +1,15 @@
 # 👐 Signify - Fullstack
 
-**Signify** est une plateforme interactive dédiée à l'apprentissage de la Langue des Signes Française (LSF). Ce projet repose sur une architecture fullstack moderne pour offrir une expérience utilisateur fluide, immersive, et accessible. Le front-end interactif est soutenu par un back-end robuste et une intelligence artificielle performante pour la reconnaissance des signes en temps réel.
+**Signify** is an interactive platform dedicated to learning French Sign Language (LSF). This project is based on a modern fullstack architecture to offer a smooth, immersive, and accessible user experience. The interactive front-end is supported by a robust back-end and powerful artificial intelligence for real-time sign recognition.
 
-## 🌟 Fonctionnalités clés
+## 🌟 Key Features
 
-- **Reconnaissance des signes par l’IA** : Retour en temps réel via la caméra des utilisateurs.
-- **Gamification** : Système de niveaux, points, et classements pour motiver la pratique régulière.
-- **Accessibilité multi-plateforme** : Utilisable sur mobile et web.
-- **Progression personnalisée** : Rappels et notifications pour encourager une pratique quotidienne.
+- **AI Sign Recognition**: Real-time feedback via the user's camera.
+- **Gamification**: Level, points, and leaderboard system to motivate regular practice.
+- **Multi-platform Accessibility**: Usable on mobile and web.
+- **Personalized Progress**: Reminders and notifications to encourage daily practice.
 
-## 🖥️ Technologies Utilisées
+## 🖥️ Technologies Used
 
 ### Front-End
 
@@ -25,33 +25,34 @@
 - ![PostgreSQL](https://img.shields.io/badge/PostgreSQL-%23336791.svg?style=for-the-badge&logo=postgresql&logoColor=white)
 - ![Prisma](https://img.shields.io/badge/Prisma-2D3748?style=for-the-badge&logo=Prisma&logoColor=white)
 
-### Intelligence Artificielle
+### Artificial Intelligence
 
 - ![PyTorch](https://img.shields.io/badge/PyTorch-%23EE4C2C.svg?style=for-the-badge&logo=pytorch&logoColor=white)
 - ![Python](https://img.shields.io/badge/Python-3670A0?style=for-the-badge&logo=python&logoColor=ffdd54)
 
-## ⚙️ Prérequis
+## ⚙️ Prerequisites
 
-- **Node.js** v14 ou supérieur
-- **npm** ou **yarn**
-- **PostgreSQL** pour la gestion des données
+- **Node.js** v14 or higher
+- **npm** or **yarn**
+- **PostgreSQL** for database management
 
 ## 🚀 Installation
 
-### 1. Cloner le dépôt
+### 1. Clone the repository
 
 ```bash
 git clone https://github.com/utilisateur/signify-fullstack.git
 cd signify-fullstack
 ```
 
-### 2. Installer les dépendances
+### 2. Install dependencies
+
 #### Front-End
 
 ```bash
 cd frontend
 npm install
-``` 
+```
 
 #### Back-End
 
@@ -60,33 +61,35 @@ cd backend
 npm install
 ```
 
-### 3. Configurer la base de données
+### 3. Configure the database
 
-Configurer PostgreSQL avec un utilisateur et une base de données spécifiques.
+Configure PostgreSQL with a specific user and database.
 
-Créer un fichier .env dans le dossier backend avec les informations suivantes :
+Create a `.env` file in the backend folder with the following information:
 
 ```env
 DATABASE_URL=postgresql://user:password@localhost:5432/signify
 ```
 
-### 4. Démarrer le projet
+### 4. Start the project
 
 ```bash
 sudo docker compose build
 sudo docker compose up
 ```
 
-Le front-end sera disponible à l'adresse http://localhost:3000.  
-Le serveur back-end sera disponible à l'adresse http://localhost:4000.  
+The front-end will be available at `http://localhost:3000`.  
+The back-end server will be available at `http://localhost:4000`.  
 
-## 🧪 Exécuter les tests
+## 🧪 Running Tests
+
 #### Front-End
 
 ```bash
 cd frontend
 npm test
 ```
+
 #### Back-End
 
 ```bash
@@ -94,8 +97,10 @@ cd backend
 npm test
 ```
 
-## 🚢 Déploiement
+## 🚢 Deployment
 
-## 👥 Contribuer
+To be documented.
 
-Les étapes pour contribuer au projet sont décrites dans le fichier [CONTRIBUTING.md](https://github.com/EIP-TEK89/trio-signo-fullstack/blob/main/Contributing.md)
+## 👥 Contributing
+
+The steps for contributing to the project are described in the file [CONTRIBUTING.md](https://github.com/EIP-TEK89/trio-signo-fullstack/blob/main/Contributing.md).
