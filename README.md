@@ -41,8 +41,8 @@
 ### 1. Clone the repository
 
 ```bash
-git clone https://github.com/utilisateur/signify-fullstack.git
-cd signify-fullstack
+git clone https://github.com/EIP-TEK89/trio-signo-fullstack.git
+cd trio-signo-fullstack
 ```
 
 ### 2. Install dependencies
@@ -50,14 +50,14 @@ cd signify-fullstack
 #### Front-End
 
 ```bash
-cd frontend
+cd trio-signo-front
 npm install
 ```
 
 #### Back-End
 
 ```bash
-cd backend
+cd trio-signo-back
 npm install
 ```
 
@@ -86,14 +86,14 @@ The back-end server will be available at `http://localhost:4000`.
 #### Front-End
 
 ```bash
-cd frontend
+cd trio-signo-front
 npm test
 ```
 
 #### Back-End
 
 ```bash
-cd backend
+cd trio-signo-back
 npm test
 ```
 
