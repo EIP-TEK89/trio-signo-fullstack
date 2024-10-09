@@ -98,25 +98,4 @@ npm test
 
 ## 👥 Contribuer
 
-Les étapes pour contribuer au projet :
-
-Forker le projet.
-Créer une nouvelle branche :
-
-```bash
-git checkout -b ma-nouvelle-fonctionnalité
-```
-
-Committer vos modifications :
-
-```bash
-git commit -m 'Ajout nouvelle fonctionnalité'
-```
-
-Pusher votre branche :
-
-```bash
-git push origin ma-nouvelle-fonctionnalité
-```
-
-Ouvrir une pull request sur le dépôt principal.
+Les étapes pour contribuer au projet sont décrites dans le fichier [CONTRIBUTING.md](https://github.com/EIP-TEK89/trio-signo-fullstack/blob/main/Contributing.md)
