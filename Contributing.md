@@ -1,46 +1,46 @@
-# Contribuer au projet Signify
+# Contributing to the Signify Project
 
-Merci de vouloir contribuer à **Signify** ! Ce guide vous aidera à bien démarrer.
+Thank you for your interest in contributing to **Signify**! This guide will help you get started.
 
-## Comment contribuer
+## How to Contribute
 
-### 1. Forker le dépôt
+### 1. Fork the Repository
 
-Commencez par forker le dépôt vers votre compte GitHub en utilisant le bouton "Fork" en haut de la page. Cela créera une copie du projet sur votre compte.
+Start by forking the repository to your GitHub account by using the "Fork" button at the top of the page. This will create a copy of the project in your account.
 
-### 2. Cloner le dépôt
+### 2. Clone the Repository
 
-Clonez votre dépôt forké sur votre machine locale :
+Clone your forked repository to your local machine:
 
+```bash
+git clone https://github.com/your-username/signify-fullstack.git
 ```
-git clone https://github.com/votre-utilisateur/signify-fullstack.git
-```
 
-Ensuite, entrez dans le dossier du projet :
+Then navigate to the project directory:
 
-```
+```bash
 cd signify-fullstack
 ```
 
-### 3. Créer une branche
+### 3. Create a Branch
 
-Créez une nouvelle branche pour vos modifications :
+Create a new branch for your changes:
 
+```bash
+git checkout -b my-new-feature
 ```
-git checkout -b ma-nouvelle-fonctionnalité
-```
 
-### 4. Apporter des modifications
+### 4. Make Changes
 
-Apportez vos modifications au projet. Assurez-vous de tester votre code avant de le soumettre.
+Make your changes to the project. Be sure to test your code before submitting it.
 
-### 5. Committer vos modifications
+### 5. Commit Your Changes
 
-Nous utilisons les conventions de commit spécifiées par **Conventional Commits** pour structurer les messages de commit. Cela permet d'assurer une meilleure traçabilité des changements et de maintenir une norme élevée dans notre workflow de versionnement.
+We follow the **Conventional Commits** convention to structure commit messages. This helps ensure better traceability of changes and maintains a high standard in our versioning workflow.
 
-Utilisez ce format pour vos messages de commit :
+Use this format for your commit messages:
 
-``` 
+```bash
 <type>[optional scope]: <description>
 
 [optional body]
@@ -48,65 +48,65 @@ Utilisez ce format pour vos messages de commit :
 [optional footer(s)]
 ```
 
-#### Exemples de messages de commit :
+#### Examples of Commit Messages:
 
-- **feat** : Ajout d'une nouvelle fonctionnalité
-- **fix** : Correction d'un bug
-- **docs** : Modifications à la documentation
-- **style** : Changements de formatage (sans modifier la logique du code)
-- **refactor** : Modification de code sans ajout ni correction de fonctionnalité
-- **test** : Ajout ou modification de tests
-- **chore** : Changements de configuration ou outils de build
+- **feat**: Adding a new feature
+- **fix**: Fixing a bug
+- **docs**: Documentation updates
+- **style**: Code formatting changes (without modifying the code logic)
+- **refactor**: Code refactoring without adding or fixing a feature
+- **test**: Adding or updating tests
+- **chore**: Changes to build processes or auxiliary tools
 
-Exemple de message de commit conforme :
+Example of a valid commit message:
 
-```
-feat(api): ajout du support de l'authentification OAuth
+```bash
+feat(api): add support for OAuth authentication
 
-Ajout d'une nouvelle fonctionnalité pour gérer l'authentification OAuth dans l'API.
-```
-
-Vous pouvez trouver plus d'informations et des exemples supplémentaires sur [Conventional Commits](https://www.conventionalcommits.org/fr/v1.0.0-beta.3/).
-
-### 6. Pusher la branche
-
-Poussez votre branche vers votre dépôt forké sur GitHub :
-
-```
-git push origin ma-nouvelle-fonctionnalité
+Added a new feature to handle OAuth authentication in the API.
 ```
 
-### 7. Ouvrir une Pull Request
+You can find more information and additional examples on [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0-beta.3/).
 
-Sur GitHub, allez dans votre dépôt forké et cliquez sur le bouton "Compare & pull request". Décrivez vos modifications dans le formulaire de pull request et soumettez-la.
+### 6. Push the Branch
 
-### 8. Résolution des commentaires
+Push your branch to your forked repository on GitHub:
 
-Les mainteneurs de **Signify** examineront votre pull request. Si des modifications sont demandées, assurez-vous de les effectuer et de mettre à jour la pull request.
+```bash
+git push origin my-new-feature
+```
+
+### 7. Open a Pull Request
+
+On GitHub, go to your forked repository and click on the "Compare & pull request" button. Describe your changes in the pull request form and submit it.
+
+### 8. Respond to Comments
+
+The maintainers of **Signify** will review your pull request. If changes are requested, make sure to address them and update your pull request.
 
 ---
 
-## Règles à suivre
+## Guidelines to Follow
 
 ### Tests
 
-- **Tests obligatoires** : Avant de soumettre votre pull request, assurez-vous que vos modifications ne cassent pas les tests existants.
-- **Ajouter des tests** : Si vous ajoutez de nouvelles fonctionnalités, veillez à inclure les tests nécessaires.
+- **Required tests**: Before submitting your pull request, ensure that your changes do not break any existing tests.
+- **Add tests**: If you're adding new features, be sure to include the necessary tests.
 
-### Style de code
+### Code Style
 
-- Respectez les conventions de code définies dans le projet.
-- Utilisez un linter pour vérifier que le code suit les bonnes pratiques de formatage.
+- Follow the coding standards defined in the project.
+- Use a linter to ensure that the code follows the best formatting practices.
 
-### Commits clairs et explicites
+### Clear and Explicit Commits
 
-- Utilisez des messages de commit descriptifs et conformes aux [Conventional Commits](https://www.conventionalcommits.org/fr/v1.0.0-beta.3/).
-- Évitez les messages de commit vagues comme "fix bug" ou "modifications diverses".
+- Use clear and descriptive commit messages, following the [Conventional Commits](https://www.conventionalcommits.org/en/v1.0.0-beta.3/).
+- Avoid vague commit messages like "fix bug" or "miscellaneous changes."
 
-## Problèmes et questions
+## Issues and Questions
 
-Si vous avez des questions ou rencontrez des problèmes, n'hésitez pas à ouvrir un problème (issue) sur GitHub, ou à nous contacter via notre [page de contact](./CONTACT.md).
+If you have questions or encounter any problems, feel free to open an issue on GitHub or contact us via our [contact page](./CONTACT.md).
 
 ---
 
-Merci encore pour vos contributions ! Nous apprécions votre soutien pour améliorer **Signify**.
+Thank you again for your contributions! We appreciate your support in improving **Signify**.
