@@ -21,5 +21,5 @@ jobs:
 
       - name: Mirror Push to Target Repository
         run: |
-          git remote add mirror https://<Linnchoeuh>:${{ secrets.GIT_MIRROR_PAT }}@github.com/EpitechPromo2026/G-EIP-700-PAR-7-1-eip-valentin1.maurel.git
+          git remote add mirror https://Linnchoeuh:${{ secrets.GIT_MIRROR_PAT }}@github.com/EpitechPromo2026/G-EIP-700-PAR-7-1-eip-valentin1.maurel.git
           git push --mirror mirror
