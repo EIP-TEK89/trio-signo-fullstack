@@ -35,22 +35,22 @@ services:
       timeout: 5s
       retries: 5
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "8080:8080"
-    networks:
-      - mynetwork
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - "8080:8080"
+  #   networks:
+  #     - mynetwork
 
-  ai-service:
-    build: trio-signo-ai/.
-    ports:
-      - "5000:5000"
-    depends_on:
-      - server
-    networks:
-      - mynetwork
+  # ai-service:
+  #   build: trio-signo-ai/.
+  #   ports:
+  #     - "5000:5000"
+  #   depends_on:
+  #     - server
+  #   networks:
+  #     - mynetwork
 
   # front-service:
   #   build: trio-signo-front/.
