@@ -10,7 +10,7 @@ services:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
       POSTGRES_DB: triosigno
-      
+
     networks:
       - mynetwork
     healthcheck:
@@ -43,23 +43,23 @@ services:
   #   networks:
   #     - mynetwork
 
-  # ai-service:
-  #   build: trio-signo-ai/.
-  #   ports:
-  #     - "5000:5000"
-  #   depends_on:
-  #     - server
-  #   networks:
-  #     - mynetwork
+  ai-service:
+    build: trio-signo-ai/.
+    ports:
+      - "5000:5000"
+    depends_on:
+      - server
+    networks:
+      - mynetwork
 
-  # front-service:
-  #   build: trio-signo-front/.
-  #   ports:
-  #     - "4000:4000"
-  #   depends_on:
-  #     - server
-  #   networks:
-  #     - mynetwork
+  front-service:
+    build: trio-signo-front/.
+    ports:
+      - "4000:4000"
+    depends_on:
+      - server
+    networks:
+      - mynetwork
 
 networks:
   mynetwork:
