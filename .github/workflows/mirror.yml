@@ -14,6 +14,13 @@ jobs:
         with:
           fetch-depth: 0  # Nécessaire pour `git push --mirror`
 
+      - name: Setup SSH Key
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan github.com >> ~/.ssh/known_hosts
+
       - name: Configure Git
         run: |
           git config --global user.name "GitHub Actions"
@@ -21,5 +28,5 @@ jobs:
 
       - name: Mirror Push to Target Repository
         run: |
-          git remote add mirror https://Linnchoeuh:${{ secrets.GIT_MIRROR_PAT }}@github.com/EpitechPromo2026/G-EIP-700-PAR-7-1-eip-valentin1.maurel.git
+          git remote add mirror git@github.com:EpitechPromo2026/G-EIP-700-PAR-7-1-eip-valentin1.maurel.git
           git push --mirror mirror
