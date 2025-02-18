@@ -1,0 +1,42 @@
+name: Deploy to VPS
+
+on:
+  push:
+    branches:
+      - vps-branch
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+        with:
+          submodules: true
+
+      - name: Get and increment build number
+        id: build_number
+        run: |
+          if [ ! -f build-number.txt ]; then
+            echo "0" > build-number.txt
+          fi
+          BUILD_NUMBER=$(cat build-number.txt)
+          NEW_BUILD_NUMBER=$((BUILD_NUMBER + 1))
+          echo $NEW_BUILD_NUMBER > build-number.txt
+          echo "BUILD_NUMBER=$NEW_BUILD_NUMBER" >> $GITHUB_ENV
+
+      - name: Setup SSH
+        uses: webfactory/ssh-agent@v0.5.3
+        with:
+          ssh-private-key: ${{ secrets.SSH_KEY }}
+
+      - name: Deploy to VPS
+        run: |
+          ssh -o StrictHostKeyChecking=no gituser@145.223.116.33 << 'EOF'
+            cd /home/gituser/trio-signo-fullstack
+            git pull --recurse-submodules
+            git submodule update --init --recursive
+            docker-compose down
+            docker-compose up -d --build
+          EOF

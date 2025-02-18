@@ -45,6 +45,20 @@ git clone https://github.com/EIP-TEK89/trio-signo-fullstack.git
 cd trio-signo-fullstack
 ```
 
+## 1.1 Clone sub-modules
+```bash
+git submodule update --init --recursive
+```
+In case you need to update the sub-modules
+```bash
+git submodule update --remote --merge
+```
+
+```bash
+git clone https://github.com/EIP-TEK89/trio-signo-fullstack.git
+cd trio-signo-fullstack
+```
+
 ### 2. Install dependencies
 
 #### Front-End
@@ -78,8 +92,8 @@ sudo docker compose build
 sudo docker compose up
 ```
 
-The front-end will be available at `http://localhost:3000`.  
-The back-end server will be available at `http://localhost:4000`.  
+The front-end will be available at `http://localhost:3000`.
+The back-end server will be available at `http://localhost:4000`.
 
 ## 🧪 Running Tests
 
