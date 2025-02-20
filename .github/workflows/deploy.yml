@@ -18,20 +18,23 @@ jobs:
           export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
 
       - name: Create folder in case not created
-        run: mkdir -p /home/$USER/triosigno-server
+        run: |
+          cd /home/triosigno/
+          mkdir -p triosigno-server
+          cd ${GITHUB_WORKSPACE}
 
       - name: Stopping server
         run: |
-          cd /home/$USER/triosigno-server
+          cd /home/triosigno/triosigno-server
           sudo docker composer down || true
           cd ${GITHUB_WORKSPACE}
 
       - name: Copy files to Service folder
         run: |
-          cp -rf . /home/$USER/triosigno-server
+          cp -rf .[!.]* * /home/triosigno/triosigno-server
 
       - name: Restart docker
         run: |
-          cd /home/$USER/triosigno-server
+          cd /home/triosigno/triosigno-server
           sudo docker up --detach
           cd ${GITHUB_WORKSPACE}
