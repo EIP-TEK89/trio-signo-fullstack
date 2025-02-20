@@ -1,42 +1,39 @@
-name: Deploy to VPS
+name: Deploy to Staging Pre-Prod Server
 
 on:
   push:
     branches:
-      - vps-branch
+      - main
 
 jobs:
   deploy:
-    runs-on: ubuntu-latest
+    runs-on: [srv730768]
+    needs: run-tests
+
 
     steps:
-      - name: Checkout code
-        uses: actions/checkout@v2
-        with:
-          submodules: true
+      - uses: actions/checkout@v4.1.5
 
-      - name: Get and increment build number
-        id: build_number
+      - name: Set variables
         run: |
-          if [ ! -f build-number.txt ]; then
-            echo "0" > build-number.txt
-          fi
-          BUILD_NUMBER=$(cat build-number.txt)
-          NEW_BUILD_NUMBER=$((BUILD_NUMBER + 1))
-          echo $NEW_BUILD_NUMBER > build-number.txt
-          echo "BUILD_NUMBER=$NEW_BUILD_NUMBER" >> $GITHUB_ENV
+          export XDG_RUNTIME_DIR="/run/user/$UID"
+          export DBUS_SESSION_BUS_ADDRESS="unix:path=${XDG_RUNTIME_DIR}/bus"
 
-      - name: Setup SSH
-        uses: webfactory/ssh-agent@v0.5.3
-        with:
-          ssh-private-key: ${{ secrets.SSH_KEY }}
+      - name: Create folder in case not created
+        run: mkdir -p /home/$USER/triosigno-server
 
-      - name: Deploy to VPS
+      - name: Stopping server
         run: |
-          ssh -o StrictHostKeyChecking=no gituser@145.223.116.33 << 'EOF'
-            cd /home/gituser/trio-signo-fullstack
-            git pull --recurse-submodules
-            git submodule update --init --recursive
-            docker-compose down
-            docker-compose up -d --build
-          EOF
+          cd /home/$USER/triosigno-server
+          sudo docker composer down || true
+          cd ${GITHUB_WORKSPACE}
+
+      - name: Copy files to Service folder
+        run: |
+          cp -rf . /home/$USER/triosigno-server
+
+      - name: Restart docker
+        run: |
+          cd /home/$USER/triosigno-server
+          sudo docker up --detach
+          cd ${GITHUB_WORKSPACE}
