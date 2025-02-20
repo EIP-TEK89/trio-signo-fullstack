@@ -157,6 +157,12 @@ tar xzf ./actions-runner-linux-x64-2.322.0.tar.gz
 ./config.sh --url https://github.com/EIP-TEK89/trio-signo-fullstack --token <your_token>
 
 ./run.sh
+
+su - root
+
+cd /home/triosigno/actions-runner
+sudo ./svc.sh install
+sudo ./svc.sh start
 ```
 
 ## 👥 Contributing

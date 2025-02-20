@@ -26,15 +26,22 @@ jobs:
       - name: Stopping server
         run: |
           cd /home/triosigno/triosigno-server
-          sudo docker composer down || true
+          sudo docker compose down || true
           cd ${GITHUB_WORKSPACE}
 
       - name: Copy files to Service folder
         run: |
           cp -rf .[!.]* * /home/triosigno/triosigno-server
 
+      - name: Cloning or updating sub-modules
+        run: |
+          cd /home/triosigno/triosigno-server
+          git submodule update --init --recursive
+          git submodule update --remote --merge
+          cd ${GITHUB_WORKSPACE}
+
       - name: Restart docker
         run: |
           cd /home/triosigno/triosigno-server
-          sudo docker up --detach
+          sudo docker compose up --detach
           cd ${GITHUB_WORKSPACE}
