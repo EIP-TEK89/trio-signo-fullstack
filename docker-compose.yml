@@ -55,6 +55,7 @@ services:
   front-service:
     build: trio-signo-front/.
     ports:
+      - "80:4000"
       - "4000:4000"
     depends_on:
       - server
