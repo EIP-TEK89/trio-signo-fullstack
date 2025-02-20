@@ -113,7 +113,51 @@ npm test
 
 ## 🚢 Deployment
 
-To be documented.
+### For ubuntu server
+```sh
+# Creating a user (if you're root)
+sudo useradd -m -d /home/triosigno -s /bin/bash triosigno
+sudo passwd triosigno
+sudo usermod -aG docker triosigno
+sudo visudo
+# Add this line: triosigno ALL=(ALL) NOPASSWD: /usr/bin/docker, /usr/bin systemctl restart docker
+# And save file (with nano: add line -> CTRL+X -> CTRL+Y)
+su - triosigno
+
+
+# Add Docker's official GPG key:
+sudo apt-get update
+sudo apt-get install ca-certificates curl
+sudo install -m 0755 -d /etc/apt/keyrings
+sudo curl -fsSL https://download.docker.com/linux/ubuntu/gpg -o /etc/apt/keyrings/docker.asc
+sudo chmod a+r /etc/apt/keyrings/docker.asc
+
+# Add the repository to Apt sources:
+echo \
+  "deb [arch=$(dpkg --print-architecture) signed-by=/etc/apt/keyrings/docker.asc] https://download.docker.com/linux/ubuntu \
+  $(. /etc/os-release && echo "${UBUNTU_CODENAME:-$VERSION_CODENAME}") stable" | \
+  sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+
+sudo apt-get install docker-ce docker-ce-cli containerd.io docker-buildx-plugin docker-compose-plugin
+
+sudo docker run hello-world
+
+
+
+# Setting up self hosted
+mkdir actions-runner && cd actions-runner
+
+curl -o actions-runner-linux-x64-2.322.0.tar.gz -L https://github.com/actions/runner/releases/download/v2.322.0/actions-runner-linux-x64-2.322.0.tar.gz
+
+echo "b13b784808359f31bc79b08a191f5f83757852957dd8fe3dbfcc38202ccf5768  actions-runner-linux-x64-2.322.0.tar.gz" | shasum -a 256 -c
+
+tar xzf ./actions-runner-linux-x64-2.322.0.tar.gz
+
+./config.sh --url https://github.com/EIP-TEK89/trio-signo-fullstack --token <your_token>
+
+./run.sh
+```
 
 ## 👥 Contributing
 
