@@ -1,6 +1,24 @@
-version: '3.8'
-
 services:
+  db:
+    image: postgres
+    restart: always
+    ports:
+      - "5432:5432"
+    volumes:
+      - ./data:/var/lib/postgresql/data
+    environment:
+      POSTGRES_USER: user
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: triosigno
+
+    networks:
+      - mynetwork
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U user -d triosigno"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
   server:
     build: trio-signo-server/.
     ports:
@@ -16,32 +34,14 @@ services:
       - mynetwork
     entrypoint: ["/bin/sh", "-c", "echo $DATABASE_URL && npx prisma migrate deploy && npm run start:prod"]
 
-  db:
-    image: postgres
-    restart: always
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./data:/var/lib/postgresql/data
-    environment:
-      POSTGRES_USER: user
-      POSTGRES_PASSWORD: password
-      POSTGRES_DB: triosigno
-    networks:
-      - mynetwork
-    healthcheck:
-      test: ["CMD-SHELL", "pg_isready -U user -d triosigno"]
-      interval: 10s
-      timeout: 5s
-      retries: 5
 
-  adminer:
-    image: adminer
-    restart: always
-    ports:
-      - "8080:8080"
-    networks:
-      - mynetwork
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - "8080:8080"
+  #   networks:
+  #     - mynetwork
 
   ai-service:
     build: trio-signo-ai/.
@@ -52,14 +52,15 @@ services:
     networks:
       - mynetwork
 
-  # front-service:
-  #   build: trio-signo-front/.
-  #   ports:
-  #     - "4000:4000"
-  #   depends_on:
-  #     - server
-  #   networks:
-  #     - mynetwork
+  front-service:
+    build: trio-signo-front/.
+    ports:
+      - "80:4000"
+      - "4000:4000"
+    depends_on:
+      - server
+    networks:
+      - mynetwork
 
 networks:
   mynetwork:

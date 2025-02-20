@@ -7,3 +7,6 @@
 [submodule "trio-signo-ai"]
 	path = trio-signo-ai
 	url = git@github.com:EIP-TEK89/trio-signo-ai.git
+[submodule "trio-signo-mobile"]
+	path = trio-signo-mobile
+	url = git@github.com:EIP-TEK89/trio-signo-mobile.git
