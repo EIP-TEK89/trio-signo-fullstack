@@ -5,7 +5,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - pgdata:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
@@ -23,8 +23,6 @@ services:
     build: trio-signo-server/.
     ports:
       - "3000:3000"
-    volumes:
-      - .:/usr/src/app
     depends_on:
       db:
         condition: service_healthy
@@ -64,3 +62,6 @@ services:
 
 networks:
   mynetwork:
+
+volumes:
+  pgdata:
