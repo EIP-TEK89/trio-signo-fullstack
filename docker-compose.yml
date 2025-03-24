@@ -30,7 +30,7 @@ services:
       DATABASE_URL: postgresql://user:password@db:5432/triosigno?schema=public
     networks:
       - mynetwork
-    entrypoint: ["/bin/sh", "-c", "echo $DATABASE_URL && npx prisma migrate deploy && npm run start:prod"]
+    # entrypoint: ["/bin/sh", "-c", "echo $DATABASE_URL && npx prisma migrate deploy && npm run start:dev"]
 
 
   # adminer:
