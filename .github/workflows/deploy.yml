@@ -23,7 +23,7 @@ jobs:
       - name: Deploy over SSH
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
-            cd /home/deploy/ton-projet
+            cd /home/deploy/trio-signo-fullstack
 
             # pull les updates du repo avec submodules
             git pull --recurse-submodules
