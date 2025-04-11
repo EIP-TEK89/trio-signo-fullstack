@@ -23,13 +23,18 @@ jobs:
       - name: Deploy over SSH
         run: |
           ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+            # Si le dossier n'existe pas, on clone le projet
+            if [ ! -d "/home/deploy/trio-signo-fullstack" ]; then
+              git clone https://github.com/EIP-TEK89/trio-signo-fullstack.git /home/deploy/trio-signo-fullstack
+            fi
+
             cd /home/deploy/trio-signo-fullstack
 
-            # pull les updates du repo avec submodules
+            # Met à jour avec les submodules
             git pull --recurse-submodules
             git submodule update --remote --merge
 
-            # rebuild + relance
+            # Build & run
             docker compose down
             docker compose pull
             docker compose up -d --build
