@@ -18,6 +18,22 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+  
+  pgadmin:
+    image: dpage/pgadmin4
+    container_name: pgadmin
+    restart: always
+    environment:
+      PGADMIN_DEFAULT_EMAIL: admin@trio.com
+      PGADMIN_DEFAULT_PASSWORD: admin
+    ports:
+      - "5050:80"
+    depends_on:
+      - db
+    volumes:
+      - pgadmin_data:/var/lib/pgadmin
+    networks:
+      - mynetwork
 
   server:
     build: trio-signo-server/.
@@ -30,16 +46,7 @@ services:
       DATABASE_URL: postgresql://user:password@db:5432/triosigno?schema=public
     networks:
       - mynetwork
-    # entrypoint: ["/bin/sh", "-c", "echo $DATABASE_URL && npx prisma migrate deploy && npm run start:dev"]
-
-
-  # adminer:
-  #   image: adminer
-  #   restart: always
-  #   ports:
-  #     - "8080:8080"
-  #   networks:
-  #     - mynetwork
+    entrypoint: ["/bin/sh", "-c", "echo $DATABASE_URL && npx prisma migrate deploy && npm run start:dev"]
 
   ai-service:
     build: trio-signo-ai/.
@@ -65,3 +72,4 @@ networks:
 
 volumes:
   pgdata:
+  pgadmin_data:
