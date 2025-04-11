@@ -30,7 +30,7 @@ jobs:
             git submodule update --remote --merge
 
             # rebuild + relance
-            docker-compose down
-            docker-compose pull
-            docker-compose up -d --build
+            docker compose down
+            docker compose pull
+            docker compose up -d --build
           EOF
