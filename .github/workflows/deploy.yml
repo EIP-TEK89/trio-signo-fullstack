@@ -30,8 +30,13 @@ jobs:
 
             cd /home/deploy/trio-signo-fullstack
 
-            # Met à jour avec les submodules
-            git pull --recurse-submodules
+            # Récupération des dernières modifications
+            git fetch --all
+            git pull origin main
+            
+            # Mise à jour correcte des submodules
+            git submodule sync
+            git submodule update --init --recursive
             git submodule update --remote --merge
 
             # Build & run
