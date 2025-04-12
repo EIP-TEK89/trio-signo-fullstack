@@ -22,25 +22,27 @@ jobs:
 
       - name: Deploy over SSH
         run: |
-          ssh -o StrictHostKeyChecking=no ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
-            # Si le dossier n'existe pas, on clone le projet
-            if [ ! -d "/home/deploy/trio-signo-fullstack" ]; then
-              git clone https://github.com/EIP-TEK89/trio-signo-fullstack.git /home/deploy/trio-signo-fullstack
-            fi
+          ssh -o StrictHostKeyChecking=no \
+              -o ServerAliveInterval=60 \
+              -o ServerAliveCountMax=10 \
+              ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
+              # Si le dossier n'existe pas, on clone le projet
+              if [ ! -d "/home/deploy/trio-signo-fullstack" ]; then
+                git clone https://github.com/EIP-TEK89/trio-signo-fullstack.git /home/deploy/trio-signo-fullstack
+              fi
 
-            cd /home/deploy/trio-signo-fullstack
+              cd /home/deploy/trio-signo-fullstack
 
-            # Récupération des dernières modifications
-            git fetch --all
-            git pull origin main
-            
-            # Mise à jour correcte des submodules
-            git submodule sync
-            git submodule update --init --recursive
-            git submodule update --remote --merge
+              # Récupération des dernières modifications
+              git fetch --all
+              git pull origin main
+              
+              # Mise à jour correcte des submodules
+              git submodule sync
+              git submodule update --init --recursive
+              git submodule update --remote --merge
 
-            # Build & run
-            docker compose down
-            docker compose pull
-            docker compose up -d --build
-          EOF
+              # Build & run
+              docker compose down
+              docker compose pull
+            EOF
