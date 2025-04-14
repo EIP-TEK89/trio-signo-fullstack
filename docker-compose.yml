@@ -46,7 +46,7 @@ services:
       DATABASE_URL: postgresql://postgres:password@db:5432/triosigno?schema=public
     networks:
       - mynetwork
-    entrypoint: ["/bin/sh", "-c", "echo \$DATABASE_URL && npx prisma migrate deploy && npm run start:dev"]
+    entrypoint: ["/bin/sh", "-c", 'echo $DATABASE_URL && npx prisma migrate deploy && npm run start:dev']
 
   ai-service:
     build: trio-signo-ai/.
