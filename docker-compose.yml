@@ -44,9 +44,6 @@ services:
         condition: service_healthy
     environment:
       - DATABASE_URLpostgresql://postgres:supersecurepassword123@db:5432/triosigno?schema=public
-      - VIRTUAL_HOST=api.${DOMAIN}
-      - LETSENCRYPT_HOST=api.${DOMAIN}
-      - LETSENCRYPT_EMAIL=${EMAIL}
     networks:
       - mynetwork
     entrypoint: ["/bin/sh", "-c", 'echo $DATABASE_URL && npx prisma migrate deploy && npm run start:dev']
@@ -63,44 +60,10 @@ services:
   front-service:
     build: trio-signo-front/.
     ports:
+      - "80:4000"
       - "4000:4000"
-    environment:
-      - VIRTUAL_HOST=${DOMAIN}
-      - LETSENCRYPT_HOST=${DOMAIN}
-      - LETSENCRYPT_EMAIL=${EMAIL}
     depends_on:
       - server
-    networks:
-      - mynetwork
-  
-  nginx-proxy:
-    image: nginxproxy/nginx-proxy:alpine
-    container_name: nginx-proxy
-    restart: always
-    ports:
-      - "80:80"
-      - "443:443"
-    volumes:
-      - /var/run/docker.sock:/tmp/docker.sock:ro
-      - ./data/certs:/etc/nginx/certs:ro
-      - ./data/vhost.d:/etc/nginx/vhost.d
-      - ./data/html:/usr/share/nginx/html
-    networks:
-      - mynetwork
-
-  letsencrypt:
-    image: nginxproxy/acme-companion
-    container_name: nginx-proxy-le
-    restart: always
-    environment:
-      - DEFAULT_EMAIL=${EMAIL}
-    volumes_from:
-      - nginx-proxy
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-      - ./data/certs:/etc/nginx/certs:rw
-      - ./data/vhost.d:/etc/nginx/vhost.d
-      - ./data/html:/usr/share/nginx/html
     networks:
       - mynetwork
 
