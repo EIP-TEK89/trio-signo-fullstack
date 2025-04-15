@@ -69,7 +69,6 @@ services:
 
 networks:
   mynetwork:
-    external: false
 
 volumes:
   pgdata:
