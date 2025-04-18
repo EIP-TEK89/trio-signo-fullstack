@@ -1,5 +1,8 @@
 networks:
   mynetwork:
+volumes:
+  postgres-data:
+    driver: local
 
 services:
   db:
@@ -8,7 +11,7 @@ services:
     ports:
       - "5432:5432"
     volumes:
-      - ./data:/var/lib/postgresql/data
+      - postgres-data:/var/lib/postgresql/data
     environment:
       POSTGRES_USER: user
       POSTGRES_PASSWORD: password
@@ -34,6 +37,11 @@ services:
       db:
         condition: service_healthy
     environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: user
+      DB_PASSWORD: password
+      DB_NAME: triosigno
       DATABASE_URL: postgresql://user:password@db:5432/triosigno?schema=public
     networks:
       - mynetwork
@@ -49,7 +57,7 @@ services:
   ai-service:
     build: trio-signo-ai/.
     ports:
-      - "5000:5000"
+      - "5001:5000"
     depends_on:
       - server
     networks:
