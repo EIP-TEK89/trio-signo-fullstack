@@ -27,7 +27,7 @@ Trio-Signo is an interactive application for learning French Sign Language (LSF)
 - Have a compatible device 
   - Runs one of the supported platforms: iOS, Android or Web browser
   - Has a working internet connection
-  - Supports video playback and recording (camera + microphone required)
+  - Supports video playback and recording (camera)
   - Has sufficient storage to install the app and store temporary files
   - For users unfamiliar with tech: support from a relative or assistant is acceptable
   - Have sufficient hardware and software capabilities to run small AI models
