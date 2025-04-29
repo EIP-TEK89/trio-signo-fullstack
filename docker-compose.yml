@@ -45,7 +45,6 @@ services:
     build: trio-signo-front/.
     ports:
       - "4000:80"
-      - "4000:4000"
     depends_on:
       - server
     networks:
