@@ -19,22 +19,6 @@ services:
       timeout: 5s
       retries: 5
 
-  pgadmin:
-    image: dpage/pgadmin4
-    container_name: pgadmin
-    restart: always
-    environment:
-      PGADMIN_DEFAULT_EMAIL: admin@trio.com
-      PGADMIN_DEFAULT_PASSWORD: admin
-    ports:
-      - "5050:80"
-    depends_on:
-      - db
-    volumes:
-      - pgadmin_data:/var/lib/pgadmin
-    networks:
-      - mynetwork
-
   server:
     build: trio-signo-server/.
     ports:
@@ -60,7 +44,7 @@ services:
   front-service:
     build: trio-signo-front/.
     ports:
-      - "80:4000"
+      - "4000:80"
       - "4000:4000"
     depends_on:
       - server
