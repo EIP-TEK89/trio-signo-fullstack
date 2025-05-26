@@ -10,7 +10,6 @@ services:
       POSTGRES_USER: postgres
       POSTGRES_PASSWORD: supersecurepassword123
       POSTGRES_DB: triosigno
-
     networks:
       - mynetwork
     healthcheck:
@@ -18,24 +17,55 @@ services:
       interval: 10s
       timeout: 5s
       retries: 5
+      
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+      - ./nginx/ssl:/etc/nginx/ssl
+      - ./nginx/www:/var/www/html
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+    depends_on:
+      - front-service
+      - server
+      - ai-service
+    networks:
+      - mynetwork
+      
+  certbot:
+    image: certbot/certbot
+    restart: unless-stopped
+    volumes:
+      - certbot-etc:/etc/letsencrypt
+      - certbot-var:/var/lib/letsencrypt
+      - ./nginx/www:/var/www/html
+    depends_on:
+      - nginx
 
   server:
     build: trio-signo-server/.
-    ports:
-      - "3000:3000"
+    restart: always
+    expose:
+      - "3000"
     depends_on:
       db:
         condition: service_healthy
     environment:
-      - DATABASE_URLpostgresql://postgres:supersecurepassword123@db:5432/triosigno?schema=public
+      - DATABASE_URL=postgresql://postgres:supersecurepassword123@db:5432/triosigno?schema=public
     networks:
       - mynetwork
-    entrypoint: ["/bin/sh", "-c", 'echo $DATABASE_URL && npx prisma migrate deploy && npm run start:dev']
+    entrypoint: ["/bin/sh", "-c", 'echo $DATABASE_URL && npx prisma migrate deploy && npm run start:prod']
 
   ai-service:
     build: trio-signo-ai/.
-    ports:
-      - "5000:5000"
+    restart: always
+    expose:
+      - "5000"
     depends_on:
       - server
     networks:
@@ -43,9 +73,9 @@ services:
 
   front-service:
     build: trio-signo-front/.
-    ports:
-      - "80:4000"
-      - "4000:4000"
+    restart: always
+    expose:
+      - "4000"
     depends_on:
       - server
     networks:
@@ -57,3 +87,5 @@ networks:
 volumes:
   pgdata:
   pgadmin_data:
+  certbot-etc:
+  certbot-var:
