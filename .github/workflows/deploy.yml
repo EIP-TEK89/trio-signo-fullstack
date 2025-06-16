@@ -56,17 +56,13 @@ jobs:
             git submodule foreach git pull origin main
 
             # Vérifier si les certificats SSL existent déjà
-            if [ ! -d "/etc/letsencrypt/live/triosigno.com" ]; then
-              echo "Initialisation des certificats SSL pour triosigno.com..."
-              # Créer les répertoires nécessaires s'ils n'existent pas
-              mkdir -p nginx/conf.d nginx/ssl nginx/www
-              
-              # Exécuter l'initialisation des certificats SSL
-              chmod +x init_ssl.sh
-              ./init_ssl.sh
-            else
-              echo "Les certificats SSL existent déjà."
-            fi
+            echo "Vérification et initialisation des certificats SSL si nécessaire..."
+            # Créer les répertoires nécessaires s'ils n'existent pas
+            mkdir -p nginx/conf.d nginx/ssl nginx/www
+            
+            # Exécuter l'initialisation des certificats SSL (le script mis à jour gère désormais les certificats existants)
+            chmod +x init_ssl.sh
+            ./init_ssl.sh
 
             # Build & run Docker
             docker compose down
