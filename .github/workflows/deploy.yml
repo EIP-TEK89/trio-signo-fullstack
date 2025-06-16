@@ -66,6 +66,15 @@ jobs:
 
             # Build & run Docker
             docker compose down
+            
+            # Reconstruire le frontend
+            echo "Construction du frontend..."
+            cd trio-signo-front
+            npm install
+            npm run build
+            cd ..
+            
+            # Démarrer les services Docker
             docker compose pull
             docker compose up -d --build
             

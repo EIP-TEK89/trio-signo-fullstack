@@ -30,7 +30,6 @@ services:
       - ./nginx/www:/var/www/html
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
-      - ./trio-signo-front/build:/usr/share/nginx/html
     depends_on:
       - front-service
       - server
