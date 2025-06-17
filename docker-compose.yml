@@ -39,7 +39,7 @@ services:
       
   certbot:
     image: certbot/certbot
-    restart: unless-stopped
+    # restart: unless-stopped
     volumes:
       - certbot-etc:/etc/letsencrypt
       - certbot-var:/var/lib/letsencrypt
@@ -50,8 +50,8 @@ services:
   server:
     build: trio-signo-server/.
     restart: always
-    expose:
-      - "3000"
+    ports:
+      - "3000:3000"
     depends_on:
       db:
         condition: service_healthy
