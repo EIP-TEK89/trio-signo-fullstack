@@ -75,7 +75,7 @@ services:
     build: trio-signo-front/.
     restart: always
     expose:
-      - "4000"
+      - "5173"
     depends_on:
       - server
     networks:
