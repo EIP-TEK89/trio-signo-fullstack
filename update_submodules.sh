@@ -29,9 +29,23 @@ COMMIT_MSG="${1:-Update all submodules to the latest commit}"
 echo -e "${YELLOW}Initialisation des sous-modules...${NC}"
 git submodule init || error_exit "Échec de l'initialisation des sous-modules."
 
-# Mettre à jour les sous-modules
-echo -e "${YELLOW}Mise à jour des sous-modules...${NC}"
+# Mettre à jour les sous-modules avec récupération complète du contenu
+echo -e "${YELLOW}Mise à jour des sous-modules avec récupération du contenu...${NC}"
+git submodule update --init --recursive || error_exit "Échec de l'initialisation récursive des sous-modules."
+
+# Mettre à jour les sous-modules à la dernière version
+echo -e "${YELLOW}Mise à jour des sous-modules à la dernière version...${NC}"
 git submodule update --remote --merge || error_exit "Échec de la mise à jour des sous-modules."
+
+# Vérifier si des dossiers de sous-modules sont vides et les remplir si nécessaire
+echo -e "${YELLOW}Vérification du contenu des sous-modules...${NC}"
+git submodule foreach '
+    if [ -z "$(ls -A)" ]; then
+        echo -e "${RED}Le sous-module $(pwd) est vide. Tentative de récupération du contenu...${NC}"
+        git checkout $(git config -f $toplevel/.gitmodules submodule.$name.branch || echo "master")
+        git pull
+    fi
+' || error_exit "Échec de la vérification/récupération du contenu des sous-modules."
 
 # Vérifier s'il y a des modifications
 if [ -z "$(git status --porcelain)" ]; then
