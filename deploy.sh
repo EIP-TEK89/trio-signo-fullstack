@@ -64,37 +64,39 @@ fi
 
 # Update AI service
 echo -e "${YELLOW}Updating AI service...${NC}"
-if [ ! -d "$AI_DIR" ]; then
-    echo -e "${YELLOW}Warning: Directory '$AI_DIR' does not exist. Skipping AI service deployment.${NC}"
-else
-    check_directory "$AI_DIR"
-    echo -e "${GREEN}Deploying AI service...${NC}"
-    cd "$AI_DIR" || exit
-    git pull origin main
-    if [ $? -ne 0 ]; then
-        echo -e "${RED}Error: AI service update failed.${NC}"
-        exit 1
-    fi
-    echo -e "${GREEN}AI service updated successfully.${NC}"
-    cd ..
-fi
+# if [ ! -d "$AI_DIR" ]; then
+#     echo -e "${YELLOW}Warning: Directory '$AI_DIR' does not exist. Skipping AI service deployment.${NC}"
+# else
+#     check_directory "$AI_DIR"
+#     echo -e "${GREEN}Deploying AI service...${NC}"
+#     cd "$AI_DIR" || exit
+#     git pull origin main
+#     if [ $? -ne 0 ]; then
+#         echo -e "${RED}Error: AI service update failed.${NC}"
+#         exit 1
+#     fi
+#     echo -e "${GREEN}AI service updated successfully.${NC}"
+#     cd ..
+# fi
 
 # Update mobile app
 echo -e "${YELLOW}Updating mobile app...${NC}"
-if [ ! -d "$MOBILE_DIR" ]; then
-    echo -e "${YELLOW}Warning: Directory '$MOBILE_DIR' does not exist. Skipping mobile app deployment.${NC}"
-else
-    check_directory "$MOBILE_DIR"
-    echo -e "${GREEN}Deploying mobile app...${NC}"
-    cd "$MOBILE_DIR" || exit
-    git pull origin main
-    if [ $? -ne 0 ]; then
-        echo -e "${RED}Error: Mobile app update failed.${NC}"
-        exit 1
-    fi
-    echo -e "${GREEN}Mobile app updated successfully.${NC}"
-    cd ..
-fi
+# if [ ! -d "$MOBILE_DIR" ]; then
+#     echo -e "${YELLOW}Warning: Directory '$MOBILE_DIR' does not exist. Skipping mobile app deployment.${NC}"
+# else
+#     check_directory "$MOBILE_DIR"
+#     echo -e "${GREEN}Deploying mobile app...${NC}"
+#     cd "$MOBILE_DIR" || exit
+#     git pull origin main
+#     if [ $? -ne 0 ]; then
+#         echo -e "${RED}Error: Mobile app update failed.${NC}"
+#         exit 1
+#     fi
+#     echo -e "${GREEN}Mobile app updated successfully.${NC}"
+#     cd ..
+# fi
+
+# Mobile and AI are not updated for now for performance reasons
 
 echo -e "${GREEN}All directory updated succesfully!${NC}"
 
