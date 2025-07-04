@@ -64,10 +64,10 @@ jobs:
             chmod +x init_ssl.sh
             ./init_ssl.sh
 
-            # Build & run Docker
-            docker compose down
-            docker compose pull
-            docker compose up -d --build
+            # Execute le script de déploiement
+            echo "Exécution du script de déploiement..."
+            chmod +x deploy.sh
+            ./deploy.sh
             
             # Vérifier l'état des services
             echo "Vérification de l'état des services..."
