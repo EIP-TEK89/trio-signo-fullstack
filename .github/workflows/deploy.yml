@@ -31,29 +31,6 @@ jobs:
             set -e  # Arrêter en cas d'erreur
             
             echo "--- [START DEPLOY] $(date) ---"
-            
-            # Vérifier que Docker est en cours d'exécution
-            if ! docker info > /dev/null 2>&1; then
-              echo "Erreur : Docker n'est pas en cours d'exécution ou nécessite des privilèges sudo"
-              exit 1
-            fi
-
-            # Clone si le projet n'existe pas
-            DEPLOY_DIR="/home/${{ secrets.VPS_USER }}/trio-signo-fullstack"
-            if [ ! -d "$DEPLOY_DIR" ]; then
-              echo "Clonage du dépôt..."
-              git clone --recursive https://github.com/EIP-TEK89/trio-signo-fullstack.git $DEPLOY_DIR
-            fi
-
-            cd $DEPLOY_DIR
-
-            # Pull du repo + submodules
-            echo "Mise à jour du dépôt et des sous-modules..."
-            git fetch --all
-            git reset --hard origin/main
-            git submodule sync
-            git submodule update --init --recursive
-            git submodule foreach git pull origin main
 
             # Vérifier si les certificats SSL existent déjà
             echo "Vérification et initialisation des certificats SSL si nécessaire..."
