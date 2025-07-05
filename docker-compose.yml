@@ -33,7 +33,6 @@ services:
     depends_on:
       - front-service
       - server
-      - ai-service
     networks:
       - mynetwork
       
@@ -61,18 +60,8 @@ services:
       - mynetwork
     entrypoint: ["/bin/sh", "-c", 'echo $DATABASE_URL && npx prisma migrate deploy && npm run start:prod']
 
-  ai-service:
-    build: trio-signo-ai/.
-    restart: always
-    expose:
-      - "5000"
-    depends_on:
-      - server
-    networks:
-      - mynetwork
-
   front-service:
-    build: trio-signo-front/.
+    build: refacto-front/.
     restart: always
     expose:
       - "5173"

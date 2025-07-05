@@ -109,13 +109,13 @@ fi
 
 # Docker commands
 echo -e "${YELLOW}Building and deploying Docker containers...${NC}"
-docker-compose down
+docker compose down
 if [ $? -ne 0 ]; then
     echo -e "${RED}Error: Docker compose down failed.${NC}"
     exit 1
 fi
 
-docker-compose up -d --build
+docker compose up -d --build
 if [ $? -ne 0 ]; then
     echo -e "${RED}Error: Docker compose up failed.${NC}"
     exit 1
