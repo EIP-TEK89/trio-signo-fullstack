@@ -30,15 +30,6 @@ jobs:
             echo "--- [START DEPLOY] $(date) ---"
             cd ./trio-signo-fullstack
 
-            # Vérifier si les certificats SSL existent déjà
-            echo "Vérification et initialisation des certificats SSL si nécessaire..."
-            # Créer les répertoires nécessaires s'ils n'existent pas
-            mkdir -p nginx/conf.d nginx/ssl nginx/www
-
-            # Exécuter l'initialisation des certificats SSL (le script mis à jour gère désormais les certificats existants)
-            chmod +x init_ssl.sh
-            ./init_ssl.sh
-
             # Execute le script de déploiement
             echo "Exécution du script de déploiement..."
             chmod +x deploy.sh
