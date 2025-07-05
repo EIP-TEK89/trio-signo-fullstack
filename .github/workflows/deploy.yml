@@ -26,14 +26,15 @@ jobs:
               -o ServerAliveCountMax=10 \
               ${{ secrets.VPS_USER }}@${{ secrets.VPS_HOST }} << 'EOF'
             set -e  # Arrêter en cas d'erreur
-            
+
             echo "--- [START DEPLOY] $(date) ---"
+            cd ./trio-signo-fullstack
 
             # Vérifier si les certificats SSL existent déjà
             echo "Vérification et initialisation des certificats SSL si nécessaire..."
             # Créer les répertoires nécessaires s'ils n'existent pas
             mkdir -p nginx/conf.d nginx/ssl nginx/www
-            
+
             # Exécuter l'initialisation des certificats SSL (le script mis à jour gère désormais les certificats existants)
             chmod +x init_ssl.sh
             ./init_ssl.sh
@@ -42,13 +43,13 @@ jobs:
             echo "Exécution du script de déploiement..."
             chmod +x deploy.sh
             ./deploy.sh
-            
+
             # Vérifier l'état des services
             echo "Vérification de l'état des services..."
             docker compose ps
-            
+
             # Renouveler les certificats SSL si nécessaire
             docker compose run --rm certbot renew --quiet
-            
+
             echo "--- [END DEPLOY] ---"
           EOF
